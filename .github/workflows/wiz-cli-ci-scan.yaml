@@ -1,8 +1,6 @@
 name: 'wiz-cli-ci-scan'
 on: 
-  pull_request:
-    branches: 
-    - main
+  workflow_dispatch
     
 jobs:
   wiz-cli-container-scan:
