@@ -50,6 +50,7 @@ jobs:
         
       - name: Install Wiz CLI
         run: |
+         cd aws/terraform-eks-fail
          curl -o wizcli https://wizcli.app.wiz.io/wizcli
          chmod +x wizcli
          
@@ -59,5 +60,4 @@ jobs:
 
       - name: Scan IaC
         run: |
-         cd aws/terraform-eks-fail
          ./wizcli iac scan --path terraform.tf --parameter-files variables.tf
