@@ -58,4 +58,4 @@ jobs:
       - name: Scan IaC
         run: |
          cd aws/terraform-eks-fail
-         ./wizcli iac scan --path eks-cluster.tf
+         ./wizcli iac scan --path terraform.tf --parameter-files variables.tf
