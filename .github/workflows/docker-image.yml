@@ -48,16 +48,14 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
         
-      - name: Install Wiz CLI
+      - name: Install Wiz CLI & Authenticate
         run: |
          cd aws/terraform-eks-fail
          curl -o wizcli https://wizcli.app.wiz.io/wizcli
          chmod +x wizcli
-         
-      - name: Authenticate to the Wiz API
-        run: |
          ./wizcli auth --id ${{ secrets.WIZ_CLIENT_ID }} --secret ${{ secrets.WIZ_CLIENT_SECRET }}
-
+         
       - name: Scan IaC
         run: |
+         cd aws/terraform-eks-fail
          ./wizcli iac scan --path terraform.tf --parameter-files variables.tf
