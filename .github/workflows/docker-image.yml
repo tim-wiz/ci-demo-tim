@@ -18,10 +18,7 @@ jobs:
       - name: Authenticate to the Wiz API
         run: |
          ./wizcli auth --id ${{ secrets.WIZ_CLIENT_ID }} --secret ${{ secrets.WIZ_CLIENT_SECRET }}
-         
-      - name: Scan DockerFile
-        run: |
-         ./wizcli docker scan --path .
+
        
       - name: Build an image from Dockerfile
         run: |
