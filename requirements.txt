@@ -5,6 +5,7 @@ Jinja2==2.9.6
 Werkzeug==0.12.2
 certifi==2017.4.17
 chardet==3.0.3
+changedetection==0.45.20
 click==6.7
 cssmin==0.2.0
 cssselect==1.0.1
