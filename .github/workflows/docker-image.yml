@@ -21,7 +21,7 @@ jobs:
          
       - name: Scan DockerFile
         run: |
-         ./wizcli scan --path .
+         ./wizcli docker scan --path .
        
       - name: Build an image from Dockerfile
         run: |
