@@ -23,7 +23,11 @@ jobs:
         run: |
           cd container-fail
           docker build -t docker.io/tim4wiz/wizdemo:1.0 .
-         
+
+      - name: List Docker images
+        run: |
+          docker images
+          
       - name: Scan Docker Image
         run: |
          ./wizcli docker scan --image docker.io/tim4wiz/wizdemo:1.0 --policy tim_container_test --policy-hits-only
