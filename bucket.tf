@@ -46,10 +46,10 @@ output "bucket_name" {
   value = aws_s3_bucket.bad_bucket.bucket
 }
 
-# output "bucket_arn" {
-#   value = aws_s3_bucket.bad_bucket.arn
-# }
-
-output "bad_user_name" {
-  value = aws_iam_user.bad_user.name
+output "bucket_arn" {
+  value = aws_s3_bucket.bad_bucket.arn
 }
+
+# output "bad_user_name" {
+#   value = aws_iam_user.bad_user.name
+# }
