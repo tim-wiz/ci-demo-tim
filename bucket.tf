@@ -14,13 +14,8 @@ resource "aws_s3_bucket" "bad_bucket" {
   # For example: "my-bad-iac-test-bucket-12345"
   bucket = "my-public-iac-test-bucket-placeholder"
   
-  # This section explicitly disables the S3 Block Public Access settings.
-  # This is the misconfiguration you are looking for.
-  # Setting all values to "false" allows public access to be granted via bucket policies or ACLs.
-  # In a real-world scenario, you would want all of these to be "true".
-  depends_on = [
-    aws_s3_bucket_public_access_block.block_public_access
-  ]
+  # The explicit 'depends_on' has been removed to fix the circular dependency.
+  # Terraform will correctly infer the dependency from the 'aws_s3_bucket_public_access_block' resource.
 }
 
 # This resource block is where the misconfiguration is introduced.
