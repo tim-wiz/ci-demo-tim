@@ -1,4 +1,5 @@
-# This is a basic Terraform configuration to demonstrate a public access misconfiguration on an S3 bucket.
+# This is a basic Terraform configuration to demonstrate a public access misconfiguration on an S3 bucket,
+# with the added vulnerability of hard-coded secrets.
 # It is intended for educational and testing purposes only.
 
 # Configure the AWS provider
@@ -11,11 +12,7 @@ provider "aws" {
 # The bucket name must be globally unique.
 resource "aws_s3_bucket" "bad_bucket" {
   # This bucket name is a placeholder, you must change it to something unique.
-  # For example: "my-bad-iac-test-bucket-12345"
-  bucket = "my-public-iac-test-bucket-placeholder"
-  
-  # The explicit 'depends_on' has been removed to fix the circular dependency.
-  # Terraform will correctly infer the dependency from the 'aws_s3_bucket_public_access_block' resource.
+  bucket = "my-public-iac-test-bucket-with-secrets-placeholder"
 }
 
 # This resource block is where the misconfiguration is introduced.
@@ -24,12 +21,24 @@ resource "aws_s3_bucket" "bad_bucket" {
 resource "aws_s3_bucket_public_access_block" "block_public_access" {
   bucket = aws_s3_bucket.bad_bucket.id
   
-  # These lines are the misconfiguration. Setting them to 'false' disables
-  # public access controls.
+  # These lines are the misconfiguration.
   block_public_acls       = false
   block_public_policy     = false
   ignore_public_acls      = false
   restrict_public_buckets = false
+}
+
+# This is a hard-coded secret.
+# In a real-world scenario, you would never store credentials like this.
+# This resource is for IaC testing purposes only.
+resource "aws_iam_user" "bad_user" {
+  name = "test-user-with-hardcoded-secret"
+  
+  # WARNING: Do not use this in a real environment.
+  # This section hard-codes sensitive data for secret scanning tests.
+  # A real key should be dynamically generated and managed securely.
+  access_key_id = "AKIAQEFZUWXMJNQDPPPZ"
+  secret_access_key = "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"
 }
 
 # Output the bucket name and ARN for verification.
@@ -39,4 +48,8 @@ output "bucket_name" {
 
 output "bucket_arn" {
   value = aws_s3_bucket.bad_bucket.arn
+}
+
+output "bad_user_name" {
+  value = aws_iam_user.bad_user.name
 }
