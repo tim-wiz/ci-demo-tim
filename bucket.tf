@@ -31,15 +31,15 @@ resource "aws_s3_bucket_public_access_block" "block_public_access" {
 # This is a hard-coded secret.
 # In a real-world scenario, you would never store credentials like this.
 # This resource is for IaC testing purposes only.
-resource "aws_iam_user" "bad_user" {
-  name = "test-user-with-hardcoded-secret"
+# resource "aws_iam_user" "bad_user" {
+  # name = "test-user-with-hardcoded-secret"
   
   # WARNING: Do not use this in a real environment.
   # This section hard-codes sensitive data for secret scanning tests.
   # A real key should be dynamically generated and managed securely.
-  access_key_id = "AKIAQEFZUWXMJNQDPPPZ"
-  secret_access_key = "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"
-}
+  # access_key_id = "AKIAQEFZUWXMJNQDPPPZ"
+  # secret_access_key = "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"
+# }
 
 # Output the bucket name and ARN for verification.
 output "bucket_name" {
