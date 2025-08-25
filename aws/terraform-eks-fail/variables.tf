@@ -10,4 +10,5 @@ variable "region" {
 
 variable "my_ip_address" {
     type = string
+    default = "0.0.0.0/0"
 }
